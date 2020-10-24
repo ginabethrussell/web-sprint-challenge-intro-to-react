@@ -12,8 +12,8 @@ const Wrapper = styled.div`
   `;
 const CharacterDisplay = styled.div`
   display: flex;
-  flexWrap: wrap;
-  justifyContent: space-evenly;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
   align-content: space-around`;
 
 const App = () => {

@@ -7,6 +7,7 @@ const CharacterCard = styled.div`
     border: 2px solid black;
     background-color: white;
     color: black;
+    margin-bottom: 20px;
     `;
 
 const CardTitle = styled.h2`
@@ -16,6 +17,11 @@ const CardTitle = styled.h2`
 const CardInfo = styled.ul`
     listType = none;
     `;
+
+const CharacterInfoItem = styled.li`
+    list-style: none;
+    text-align: left;
+`;
 export default function Character(props){
     const {swData} = props;
 
@@ -23,13 +29,13 @@ export default function Character(props){
         <CharacterCard>
             <CardTitle>{swData.name}</CardTitle>
             <CardInfo>
-                <li>Birth Year: {swData.birth_year}</li>
-                <li>Gender: {swData.gender}</li>
-                <li>Height: {swData.height}</li>
-                <li>Mass: {swData.mass}</li>
-                <li>Hair color: {swData.hair_color}</li>
-                <li>Eye color: {swData.eye_color}</li>
-                <li>Skin color: {swData.skin_color}</li>
+                <CharacterInfoItem>Birth Year: {swData.birth_year}</CharacterInfoItem>
+                <CharacterInfoItem>Gender: {swData.gender}</CharacterInfoItem>
+                <CharacterInfoItem>Height: {swData.height}</CharacterInfoItem>
+                <CharacterInfoItem>Mass: {swData.mass}</CharacterInfoItem>
+                <CharacterInfoItem>Hair color: {swData.hair_color}</CharacterInfoItem>
+                <CharacterInfoItem>Eye color: {swData.eye_color}</CharacterInfoItem>
+                <CharacterInfoItem>Skin color: {swData.skin_color}</CharacterInfoItem>
             </CardInfo>
 
         </CharacterCard>
