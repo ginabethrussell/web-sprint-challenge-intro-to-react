@@ -11,8 +11,19 @@ const Wrapper = styled.div`
   max-width: 960px;
   margin: 0 auto;
   `;
+
+const Header = styled.div`
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  align-content: space-around;
+  `;
+
 const Title = styled.h1`
-font-size: 3rem;
+font-size: 4rem;
 font-family: 'Turret Road', cursive;
 font-weight: 700;
 `;
@@ -26,7 +37,6 @@ const CharacterDisplay = styled.div`
 const App = () => {
   // Try to think through what state you'll need for this app before starting. Then build out
   // the state properties here.
-
   // Set up state to hold character data from Star Wars API
   const [characterData, setCharacterData] = useState([]);
 
@@ -52,13 +62,14 @@ const App = () => {
     })
   }
 function nextCharacters(){
-  if (nextUrl === null){
-    setNextUrl(`https://swapi.dev/api/people/`)
-  }
   axios.get(`${nextUrl}`)
   .then(response => {
     console.log(response.data);
-    setNextUrl(response.data.next);
+    if (response.data.next === null){
+      setNextUrl('https://swapi.dev/api/people/');
+    }else{
+      setNextUrl(response.data.next);
+    }
     return response.data.results;
 
   })
@@ -69,6 +80,7 @@ function nextCharacters(){
   })
   .catch(err => console.log(err))
 }
+
   // Fetch characters from the API in an effect hook. Remember, anytime you have a 
   // side effect in a component, you want to think about which state and/or props it should
   // sync up with, if any.
@@ -92,15 +104,17 @@ function nextCharacters(){
   return (
     <div className="App">
       <Wrapper >
-        <Title>Star Wars Characters</Title>
+        <Header >
+          <Title>Star Wars Characters</Title>
+          <MoreDataButton nextCharacters={nextCharacters} nextUrl={nextUrl}/>
+        </Header>
         <CharacterDisplay >
         {
           characterData.map(character => (
             <Character key={character.url} swData={character} />
           ))
         }
-        </CharacterDisplay>
-        <MoreDataButton nextCharacters={nextCharacters}/>
+        </CharacterDisplay> 
       </Wrapper>
     </div>
   );

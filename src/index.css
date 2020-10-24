@@ -10,5 +10,5 @@ body {
   font-family: sans-serif;
   background-image: url('./images/sw-bg.jpg');
   background-size: center cover;
-  height: 100vh;
+  height: 100%;
 }
