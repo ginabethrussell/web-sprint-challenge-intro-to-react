@@ -20,6 +20,10 @@ const Header = styled.div`
   justify-content: space-between;
   align-items: center;
   align-content: space-around;
+  @media(max-width: 500px){
+    flex-direction: column;
+    align-items: center;
+  }
   `;
 
 const Title = styled.h1`
