@@ -8,10 +8,21 @@ const CharacterCard = styled.div`
     background-color: white;
     color: black;
     margin-bottom: 20px;
+    @media(max-width: 800px){
+        width:45%;
+    }
+    @media(max-width: 500px){
+        width: 75%;
+    }
     `;
 
 const CardTitle = styled.h2`
-    font-size: 2 rem;
+    font-size: 2rem;
+    background-color: #b08d6f;
+    margin-top: 0;
+    padding: 8px;
+    font-family: 'Turret Road', cursive;
+    font-weight: 700;
     `;
 
 const CardInfo = styled.ul`
@@ -21,6 +32,9 @@ const CardInfo = styled.ul`
 const CharacterInfoItem = styled.li`
     list-style: none;
     text-align: left;
+    font-size: 1.6rem;
+    margin-bottom: 8px;
+    font-family: monospace;
 `;
 export default function Character(props){
     const {swData} = props;

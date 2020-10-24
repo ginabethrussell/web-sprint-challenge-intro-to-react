@@ -10,6 +10,12 @@ const Wrapper = styled.div`
   max-width: 960px;
   margin: 0 auto;
   `;
+const Title = styled.h1`
+font-size: 3rem;
+font-family: 'Turret Road', cursive;
+font-weight: 700;
+`;
+
 const CharacterDisplay = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -39,7 +45,7 @@ const App = () => {
   return (
     <div className="App">
       <Wrapper >
-        <h1 className="Header">Star Wars Characters</h1>
+        <Title>Star Wars Characters</Title>
         <CharacterDisplay >
         {
           characterData.map(character => (
