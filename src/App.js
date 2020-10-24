@@ -3,6 +3,7 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import './App.css';
 import Character from './components/Character';
+import MoreDataButton from './components/MoreDataButton';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -29,6 +30,11 @@ const App = () => {
   // Set up state to hold character data from Star Wars API
   const [characterData, setCharacterData] = useState([]);
 
+  // Create a state data to get additional characters from the api
+  
+  // Get the next url for more results
+  const [nextUrl, setNextUrl] = useState('');
+
   function cleanData(dataArr){
     return dataArr.map(character => {
       const newCharacterObj = {
@@ -45,7 +51,24 @@ const App = () => {
       return newCharacterObj;
     })
   }
+function nextCharacters(){
+  if (nextUrl === null){
+    setNextUrl(`https://swapi.dev/api/people/`)
+  }
+  axios.get(`${nextUrl}`)
+  .then(response => {
+    console.log(response.data);
+    setNextUrl(response.data.next);
+    return response.data.results;
 
+  })
+  .then(dataList => {
+    const characterData = cleanData(dataList);
+    console.log(characterData);
+    setCharacterData(characterData);
+  })
+  .catch(err => console.log(err))
+}
   // Fetch characters from the API in an effect hook. Remember, anytime you have a 
   // side effect in a component, you want to think about which state and/or props it should
   // sync up with, if any.
@@ -53,7 +76,9 @@ const App = () => {
     axios.get('https://swapi.dev/api/people/')
       .then(response => {
         console.log(response.data);
+        setNextUrl(response.data.next);
         return response.data.results;
+
       })
       .then(dataList => {
         const characterData = cleanData(dataList);
@@ -63,7 +88,7 @@ const App = () => {
       .catch(err => console.log(err))
   },[]);
 
-
+  
   return (
     <div className="App">
       <Wrapper >
@@ -75,6 +100,7 @@ const App = () => {
           ))
         }
         </CharacterDisplay>
+        <MoreDataButton nextCharacters={nextCharacters}/>
       </Wrapper>
     </div>
   );
