@@ -29,6 +29,23 @@ const App = () => {
   // Set up state to hold character data from Star Wars API
   const [characterData, setCharacterData] = useState([]);
 
+  function cleanData(dataArr){
+    return dataArr.map(character => {
+      const newCharacterObj = {
+        name: character.name,
+        birthYear: character.birth_year,
+        gender: character.gender,
+        height: character.height,
+        mass: character.mass,
+        hairColor: character.hair_color,
+        eyeColor: character.eye_color,
+        skinColor: character.skin_color,
+        url: character.url
+      }
+      return newCharacterObj;
+    })
+  }
+
   // Fetch characters from the API in an effect hook. Remember, anytime you have a 
   // side effect in a component, you want to think about which state and/or props it should
   // sync up with, if any.
@@ -36,7 +53,12 @@ const App = () => {
     axios.get('https://swapi.dev/api/people/')
       .then(response => {
         console.log(response.data);
-        setCharacterData(response.data.results);
+        return response.data.results;
+      })
+      .then(dataList => {
+        const characterData = cleanData(dataList);
+        console.log(characterData);
+        setCharacterData(characterData);
       })
       .catch(err => console.log(err))
   },[]);
@@ -49,7 +71,7 @@ const App = () => {
         <CharacterDisplay >
         {
           characterData.map(character => (
-            <Character key={character.created} swData={character} />
+            <Character key={character.url} swData={character} />
           ))
         }
         </CharacterDisplay>

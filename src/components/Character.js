@@ -43,13 +43,13 @@ export default function Character(props){
         <CharacterCard>
             <CardTitle>{swData.name}</CardTitle>
             <CardInfo>
-                <CharacterInfoItem>Birth Year: {swData.birth_year}</CharacterInfoItem>
+                <CharacterInfoItem>Birth Year: {swData.birthYear}</CharacterInfoItem>
                 <CharacterInfoItem>Gender: {swData.gender}</CharacterInfoItem>
                 <CharacterInfoItem>Height: {swData.height}</CharacterInfoItem>
                 <CharacterInfoItem>Mass: {swData.mass}</CharacterInfoItem>
-                <CharacterInfoItem>Hair color: {swData.hair_color}</CharacterInfoItem>
-                <CharacterInfoItem>Eye color: {swData.eye_color}</CharacterInfoItem>
-                <CharacterInfoItem>Skin color: {swData.skin_color}</CharacterInfoItem>
+                <CharacterInfoItem>Hair color: {swData.hairColor}</CharacterInfoItem>
+                <CharacterInfoItem>Eye color: {swData.eyeColor}</CharacterInfoItem>
+                <CharacterInfoItem>Skin color: {swData.skinColor}</CharacterInfoItem>
             </CardInfo>
 
         </CharacterCard>
